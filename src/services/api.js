@@ -1,37 +1,34 @@
 export async function askRAG(question, onStage) {
-  // TEMPORARY MOCK BACKEND
-  // Your friend's backend will replace this.
-
   onStage("retrieving");
 
-  await new Promise((resolve) => setTimeout(resolve, 350));
+  const response = await fetch("http://localhost:8000/api/query", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: question }),
+  });
 
   onStage("generating");
 
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  if (!response.ok) {
+    throw new Error(`RAG backend error: ${response.status}`);
+  }
+
+  const data = await response.json();
 
   return {
-    answer:
-      "This is a temporary demonstration response. Once the RAG backend is connected, this answer will be generated strictly from the relevant passages retrieved from the MSMARCO-XI knowledge base.",
-
-    grounded: true,
-
-    confidence: 0.94,
-
-    sources: [
-      {
-        text: "Retrieved passage 1 — Relevant context from the indexed MSMARCO-XI dataset.",
-      },
-      {
-        text: "Retrieved passage 2 — Additional context supporting the generated answer.",
-      },
-    ],
-
+    answer: data.answer,
+    grounded: data.grounded,
+    confidence: null,
+    sources: (data.sources || []).map((s) => ({
+      text: s.text,
+      language: s.language,
+      score: s.score,
+    })),
     latency_ms: {
-      stt: 42,
-      retrieval: 18,
-      generation: 71,
-      total: 131,
+      stt: null,
+      retrieval: data.latency_ms?.retrieval ?? null,
+      generation: data.latency_ms?.generation ?? null,
+      total: data.latency_ms?.total ?? null,
     },
   };
 }
