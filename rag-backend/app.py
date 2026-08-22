@@ -75,12 +75,24 @@ app.add_middleware(
 def _response_from_harness(result: dict[str, Any]) -> QueryResponse:
     """Translate harness statuses into the API's stable success/refusal schema."""
     status = result.get("status")
-    if status == "success":
+    answer_text = result.get("answer") or ""
+    is_llm_refusal = answer_text.strip() == "I don't have enough information to answer that"
+    if status == "success" and not is_llm_refusal:
         return QueryResponse(
             answer=result.get("answer"),
             grounded=True,
             refused=False,
             refusal_reason=None,
+            sources=result.get("sources", []),
+            latency_ms=result.get("latency_ms", {}),
+            model_used=result.get("model_used", ""),
+        )
+    if status == "success" and is_llm_refusal:
+        return QueryResponse(
+            answer=result.get("answer"),
+            grounded=False,
+            refused=True,
+            refusal_reason="llm_insufficient_context",
             sources=result.get("sources", []),
             latency_ms=result.get("latency_ms", {}),
             model_used=result.get("model_used", ""),
