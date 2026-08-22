@@ -143,23 +143,79 @@ function App() {
         {!transcript && !result && (
           <div className="suggestions-container">
             <p className="suggestions-title">Try asking:</p>
-            <div className="suggestions-grid">
-              <button className="suggestion-pill" onClick={() => handleTranscript("What is the net gain and loss?")}>
-                <span className="lang-tag lang-tag--en">English</span>
-                <span className="suggestion-text">What is the net gain and loss?</span>
-              </button>
-              <button className="suggestion-pill" onClick={() => handleTranscript("गोल्ड पैमाने पर सोने की कठोरता कितनी होती है?")}>
-                <span className="lang-tag lang-tag--hi">हिंदी</span>
-                <span className="suggestion-text">गोल्ड पैमाने पर सोने की कठोरता कितनी होती है?</span>
-              </button>
-              <button className="suggestion-pill" onClick={() => handleTranscript("Sled pull karne ke liye kis type ke dogs use hote hai?")}>
-                <span className="lang-tag lang-tag--hinglish">Hinglish</span>
-                <span className="suggestion-text">Sled pull karne ke liye kis type ke dogs use hote hai?</span>
-              </button>
-              <button className="suggestion-pill" onClick={() => handleTranscript("Context Left The Chat 🚪")}>
-                <span className="suggestion-text">Context Left The Chat 🚪</span>
-              </button>
-            </div>
+         <div className="suggestions-grid">
+  <button
+    className="suggestion-pill"
+    onClick={() => handleTranscript("What is Werner syndrome")}
+  >
+    <span className="lang-tag lang-tag--en">English</span>
+    <span className="suggestion-text">
+      What is Werner syndrome (English)
+    </span>
+  </button>
+
+  <button
+    className="suggestion-pill"
+    onClick={() => handleTranscript("मैनहट्टन परियोजना क्या है")}
+  >
+    <span className="lang-tag lang-tag--hi">हिंदी</span>
+    <span className="suggestion-text">
+      मैनहट्टन परियोजना क्या है
+    </span>
+  </button>
+
+  <button
+    className="suggestion-pill"
+    onClick={() => handleTranscript("How do I reset my password")}
+  >
+    <span className="lang-tag lang-tag--en">English</span>
+    <span className="suggestion-text">
+      How do I reset my password
+    </span>
+  </button>
+
+  <button
+    className="suggestion-pill"
+    onClick={() => handleTranscript("फ्लूम किस दिशा में बहता है")}
+  >
+    <span className="lang-tag lang-tag--hi">हिंदी</span>
+    <span className="suggestion-text">
+      फ्लूम किस दिशा में बहता है
+    </span>
+  </button>
+
+  <button
+    className="suggestion-pill"
+    onClick={() => handleTranscript("what is the capital of france")}
+  >
+    <span className="lang-tag lang-tag--en">English</span>
+    <span className="suggestion-text">
+      what is the capital of france
+    </span>
+  </button>
+
+  <button
+    className="suggestion-pill"
+    onClick={() => handleTranscript("tell me a joke")}
+  >
+    <span className="lang-tag lang-tag--en">English</span>
+    <span className="suggestion-text">
+      tell me a joke
+    </span>
+  </button>
+
+  <button
+    className="suggestion-pill"
+    onClick={() =>
+      handleTranscript("गोल्ड पैमाने पर सोने की कठोरता कितनी होती है")
+    }
+  >
+    <span className="lang-tag lang-tag--hi">हिंदी</span>
+    <span className="suggestion-text">
+      गोल्ड पैमाने पर सोने की कठोरता कितनी होती है
+    </span>
+  </button>
+</div>
           </div>
         )}
       </section>
